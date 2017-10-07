@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import StudentSearchBar from './students-search-bar';
+import StudentSearchBar from '../containers/students-search-bar';
 
 class Home extends Component {
   //renderizar o componente de busca de um aluno

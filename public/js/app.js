@@ -30147,7 +30147,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _studentsSearchBar = __webpack_require__(289);
+var _studentsSearchBar = __webpack_require__(619);
 
 var _studentsSearchBar2 = _interopRequireDefault(_studentsSearchBar);
 
@@ -30188,134 +30188,7 @@ var Home = function (_Component) {
 exports.default = Home;
 
 /***/ }),
-/* 289 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _lodash = __webpack_require__(297);
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var _react = __webpack_require__(3);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactBootstrapTypeahead = __webpack_require__(438);
-
-var _reactRedux = __webpack_require__(257);
-
-var _actionsStudents = __webpack_require__(616);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var StudentSearchBar = function (_Component) {
-  _inherits(StudentSearchBar, _Component);
-
-  function StudentSearchBar(props) {
-    _classCallCheck(this, StudentSearchBar);
-
-    var _this = _possibleConstructorReturn(this, (StudentSearchBar.__proto__ || Object.getPrototypeOf(StudentSearchBar)).call(this, props));
-
-    _this.state = {
-      term: '',
-      submitFormOnEnter: true
-    };
-
-    _this._handleChange = _this._handleChange.bind(_this);
-    _this._handleSubmit = _this._handleSubmit.bind(_this);
-    return _this;
-  }
-
-  _createClass(StudentSearchBar, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.props.getStudents();
-    }
-  }, {
-    key: '_handleChange',
-    value: function _handleChange(textTyped) {
-      this.setState({
-        term: textTyped
-      });
-    }
-  }, {
-    key: '_handleSubmit',
-    value: function _handleSubmit(e) {
-      e.preventDefault();
-
-      alert(this.state.term);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var options = this.props.students;
-
-      var submitFormOnEnter = this.state.submitFormOnEnter;
-
-
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'form',
-          {
-            onSubmit: this._handleSubmit,
-            className: 'input-group' },
-          _react2.default.createElement(_reactBootstrapTypeahead.Typeahead, {
-            labelKey: 'name',
-            value: this.state.term,
-            options: options,
-            placeholder: 'Entre com o nome do aluno...',
-            onInputChange: this._handleChange,
-            submitFormOnEnter: submitFormOnEnter
-          }),
-          _react2.default.createElement(
-            'span',
-            { className: 'input-group-btn' },
-            _react2.default.createElement(
-              'button',
-              { className: 'btn btn-primary' },
-              'Buscar'
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return StudentSearchBar;
-}(_react.Component);
-
-function mapStateToProps(state) {
-
-  var result = [];
-
-  result = _lodash2.default.concat(result, _lodash2.default.map(state.students, function (student) {
-    return student.name;
-  }));
-
-  return {
-    students: result
-  };
-}
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, { getStudents: _actionsStudents.getStudents })(StudentSearchBar);
-
-/***/ }),
+/* 289 */,
 /* 290 */,
 /* 291 */,
 /* 292 */,
@@ -76205,6 +76078,134 @@ exports.default = function () {
       return state;
   }
 };
+
+/***/ }),
+/* 619 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _lodash = __webpack_require__(297);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactBootstrapTypeahead = __webpack_require__(438);
+
+var _reactRedux = __webpack_require__(257);
+
+var _actionsStudents = __webpack_require__(616);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var StudentSearchBar = function (_Component) {
+  _inherits(StudentSearchBar, _Component);
+
+  function StudentSearchBar(props) {
+    _classCallCheck(this, StudentSearchBar);
+
+    var _this = _possibleConstructorReturn(this, (StudentSearchBar.__proto__ || Object.getPrototypeOf(StudentSearchBar)).call(this, props));
+
+    _this.state = {
+      term: '',
+      student: {},
+      submitFormOnEnter: true
+    };
+
+    _this._handleChange = _this._handleChange.bind(_this);
+    _this._handleSubmit = _this._handleSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(StudentSearchBar, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.props.getStudents();
+    }
+  }, {
+    key: '_handleChange',
+    value: function _handleChange(selectedItem) {
+      this.setState({
+        student: selectedItem
+      });
+    }
+  }, {
+    key: '_handleSubmit',
+    value: function _handleSubmit(e) {
+      e.preventDefault();
+
+      //mandar esse objeto para ser construído depois da busca
+      console.log(_lodash2.default.get(this.state.student, 0));
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var submitFormOnEnter = this.state.submitFormOnEnter;
+
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'form',
+          {
+            onSubmit: this._handleSubmit,
+            className: 'input-group' },
+          _react2.default.createElement(_reactBootstrapTypeahead.Typeahead, {
+            labelKey: 'name',
+            value: this.state.term,
+            options: this.props.students,
+            onChange: this._handleChange,
+            placeholder: 'Entre com o nome do aluno...',
+            submitFormOnEnter: submitFormOnEnter
+          }),
+          _react2.default.createElement(
+            'span',
+            { className: 'input-group-btn' },
+            _react2.default.createElement(
+              'button',
+              { className: 'btn btn-primary' },
+              'Buscar'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return StudentSearchBar;
+}(_react.Component);
+
+function mapStateToProps(_ref) {
+  var students = _ref.students;
+
+
+  var studentsList = _lodash2.default.concat([], _lodash2.default.map(students, function (student) {
+    return student;
+  }));
+
+  return {
+    students: studentsList
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { getStudents: _actionsStudents.getStudents })(StudentSearchBar);
 
 /***/ })
 /******/ ]);

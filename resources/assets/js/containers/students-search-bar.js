@@ -12,6 +12,7 @@ class StudentSearchBar extends Component {
 
     this.state = {
       term: '',
+      student: {},
       submitFormOnEnter: true,
     };
 
@@ -23,21 +24,20 @@ class StudentSearchBar extends Component {
     this.props.getStudents();
   }
 
-  _handleChange(textTyped) {
+  _handleChange(selectedItem) {
     this.setState({
-      term: textTyped
+      student: selectedItem
     });
   }
 
   _handleSubmit(e) {
     e.preventDefault();
 
-    alert(this.state.term);
+    //mandar esse objeto para ser construído depois da busca
+    console.log(_.get(this.state.student, 0));
   }
 
   render () {
-    const options = this.props.students;
-
     const { submitFormOnEnter } = this.state;
 
     return (
@@ -49,9 +49,9 @@ class StudentSearchBar extends Component {
           <Typeahead
             labelKey="name"
             value={ this.state.term }
-            options={ options }
+            options={ this.props.students }
+            onChange={ this._handleChange }
             placeholder="Entre com o nome do aluno..."
-            onInputChange={ this._handleChange }
             submitFormOnEnter={ submitFormOnEnter }
           />
 
@@ -64,17 +64,15 @@ class StudentSearchBar extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ students }) {
 
-  let result = [];
-
-  result = _.concat(result, _.map(state.students, student => {
-    return student.name;
+  const studentsList = _.concat([], _.map(students, student => {
+    return student;
   }));
 
   return {
-    students: result,
-  }
+    students: studentsList
+  };
 }
 
 export default connect(mapStateToProps, { getStudents })(StudentSearchBar);
