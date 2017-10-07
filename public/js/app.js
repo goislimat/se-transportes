@@ -30118,12 +30118,14 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(66);
 
-var rootReducer = (0, _redux.combineReducers)({
-  state: function state() {
-    var _state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+var _reducer_students = __webpack_require__(618);
 
-    return _state;
-  }
+var _reducer_students2 = _interopRequireDefault(_reducer_students);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var rootReducer = (0, _redux.combineReducers)({
+  students: _reducer_students2.default
 });
 
 exports.default = rootReducer;
@@ -30198,11 +30200,19 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _lodash = __webpack_require__(297);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
 var _reactBootstrapTypeahead = __webpack_require__(438);
+
+var _reactRedux = __webpack_require__(257);
+
+var _actionsStudents = __webpack_require__(616);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30211,8 +30221,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-//import { Typeahead } from 'react-typeahead';
-
 
 var StudentSearchBar = function (_Component) {
   _inherits(StudentSearchBar, _Component);
@@ -30233,6 +30241,11 @@ var StudentSearchBar = function (_Component) {
   }
 
   _createClass(StudentSearchBar, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.props.getStudents();
+    }
+  }, {
     key: '_handleChange',
     value: function _handleChange(textTyped) {
       this.setState({
@@ -30249,7 +30262,7 @@ var StudentSearchBar = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var options = ['John', 'Miles', 'Charles', 'Herbie'];
+      var options = this.props.students;
 
       var submitFormOnEnter = this.state.submitFormOnEnter;
 
@@ -30266,7 +30279,7 @@ var StudentSearchBar = function (_Component) {
             labelKey: 'name',
             value: this.state.term,
             options: options,
-            placeholder: 'Choose a student...',
+            placeholder: 'Entre com o nome do aluno...',
             onInputChange: this._handleChange,
             submitFormOnEnter: submitFormOnEnter
           }),
@@ -30276,7 +30289,7 @@ var StudentSearchBar = function (_Component) {
             _react2.default.createElement(
               'button',
               { className: 'btn btn-primary' },
-              'Search'
+              'Buscar'
             )
           )
         )
@@ -30287,7 +30300,20 @@ var StudentSearchBar = function (_Component) {
   return StudentSearchBar;
 }(_react.Component);
 
-exports.default = StudentSearchBar;
+function mapStateToProps(state) {
+
+  var result = [];
+
+  result = _lodash2.default.concat(result, _lodash2.default.map(state.students, function (student) {
+    return student.name;
+  }));
+
+  return {
+    students: result
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { getStudents: _actionsStudents.getStudents })(StudentSearchBar);
 
 /***/ }),
 /* 290 */,
@@ -76102,6 +76128,83 @@ function isIterateeCall(value, index, object) {
 
 module.exports = isIterateeCall;
 
+
+/***/ }),
+/* 616 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getStudents = exports.GET_STUDENTS = undefined;
+
+var _axios = __webpack_require__(300);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _globalConstants = __webpack_require__(617);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var GET_STUDENTS = exports.GET_STUDENTS = 'GET_STUDENTS';
+var RESOURCE = 'alunos';
+
+var getStudents = exports.getStudents = function getStudents() {
+  var url = '' + _globalConstants.ROOT_URL + RESOURCE;
+
+  var request = _axios2.default.get(url);
+
+  return {
+    type: GET_STUDENTS,
+    payload: request
+  };
+};
+
+/***/ }),
+/* 617 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var ROOT_URL = exports.ROOT_URL = 'http://localhost:8000/api/';
+
+/***/ }),
+/* 618 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _lodash = __webpack_require__(297);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _actionsStudents = __webpack_require__(616);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _actionsStudents.GET_STUDENTS:
+      return _lodash2.default.mapKeys(action.payload.data, 'id');
+    default:
+      return state;
+  }
+};
 
 /***/ })
 /******/ ]);

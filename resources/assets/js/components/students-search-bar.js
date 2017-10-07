@@ -1,6 +1,9 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
-//import { Typeahead } from 'react-typeahead';
 import { Typeahead } from 'react-bootstrap-typeahead';
+import { connect } from 'react-redux';
+
+import { getStudents } from "../actions/actions-students";
 
 class StudentSearchBar extends Component {
 
@@ -16,6 +19,10 @@ class StudentSearchBar extends Component {
     this._handleSubmit = this._handleSubmit.bind(this);
   }
 
+  componentWillMount() {
+    this.props.getStudents();
+  }
+
   _handleChange(textTyped) {
     this.setState({
       term: textTyped
@@ -29,7 +36,7 @@ class StudentSearchBar extends Component {
   }
 
   render () {
-    const options = [ 'John', 'Miles', 'Charles', 'Herbie', ];
+    const options = this.props.students;
 
     const { submitFormOnEnter } = this.state;
 
@@ -43,13 +50,13 @@ class StudentSearchBar extends Component {
             labelKey="name"
             value={ this.state.term }
             options={ options }
-            placeholder="Choose a student..."
+            placeholder="Entre com o nome do aluno..."
             onInputChange={ this._handleChange }
             submitFormOnEnter={ submitFormOnEnter }
           />
 
           <span className="input-group-btn">
-            <button className="btn btn-primary">Search</button>
+            <button className="btn btn-primary">Buscar</button>
           </span>
         </form>
       </div>
@@ -57,4 +64,17 @@ class StudentSearchBar extends Component {
   }
 }
 
-export default StudentSearchBar;
+function mapStateToProps(state) {
+
+  let result = [];
+
+  result = _.concat(result, _.map(state.students, student => {
+    return student.name;
+  }));
+
+  return {
+    students: result,
+  }
+}
+
+export default connect(mapStateToProps, { getStudents })(StudentSearchBar);
