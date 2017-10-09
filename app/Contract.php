@@ -13,6 +13,7 @@ class Contract extends Model
         'monthly_payment',
         'payment_day',
         'last_month_paid',
+        'year',
         'accumulated_debt',
         'shift',
         'started_at',
@@ -22,5 +23,13 @@ class Contract extends Model
 
     public function student() {
         return $this->belongsTo(Student::class);
+    }
+
+    public function school() {
+        return $this->belongsTo(School::class);
+    }
+
+    public function payments() {
+        return $this->hasMany(Payment::class);
     }
 }

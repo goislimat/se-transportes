@@ -25,6 +25,7 @@ class CreateContractsTable extends Migration
             $table->decimal('monthly_payment', 5, 2)->nullable();
             $table->smallInteger('payment_day')->nullable();
             $table->smallInteger('last_month_paid')->nullable();
+            $table->integer('year')->nullable();
             $table->decimal('accumulated_debt', 5, 2)->nullable();
             $table->smallInteger('shift')->nullable();
 
