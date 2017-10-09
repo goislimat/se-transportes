@@ -56,7 +56,7 @@ class StudentSearchBar extends Component {
           />
 
           <span className="input-group-btn">
-            <button className="btn btn-primary">Buscar</button>
+            <button className="btn btn-dark">Buscar</button>
           </span>
         </form>
       </div>

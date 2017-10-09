@@ -15,16 +15,29 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxPromise from 'redux-promise';
 
 import reducers from './reducers/index';
+import NavBar from './components/nav-bar';
 import Home from './components/home';
+import Students from './components/students';
+import StudentsNew from './components/students-new';
+import Income from './components/income';
+import Payments from './components/payments';
+
 
 const createStoreWithMiddleware = applyMiddleware(reduxPromise)(createStore);
 
 ReactDom.render(
   <Provider store={ createStoreWithMiddleware(reducers) }>
     <BrowserRouter>
-      <Switch>
-        <Route path="/home" component={ Home } />
-      </Switch>
+      <div>
+        <NavBar/>
+        <Switch>
+          <Route path="/home" component={ Home } />
+          <Route path="/alunos/novo" component={ StudentsNew } />
+          <Route path="/alunos" component={ Students } />
+          <Route path="/rendimentos" component={ Income } />
+          <Route path="/pagamentos" component={ Payments } />
+        </Switch>
+      </div>
     </BrowserRouter>
   </Provider>
   , document.getElementById('content')
